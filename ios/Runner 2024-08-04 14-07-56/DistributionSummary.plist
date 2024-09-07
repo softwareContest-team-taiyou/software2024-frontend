@@ -252,7 +252,7 @@
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>FNUWZDVK8P.com.example.flutterTemplate0510</string>
+				<string>FNUWZDVK8P.com.unagipai.boxkeyper</string>
 				<key>beta-reports-active</key>
 				<true/>
 				<key>com.apple.developer.associated-domains</key>
@@ -273,7 +273,7 @@
 				<key>dateExpires</key>
 				<string>2025/07/31</string>
 				<key>name</key>
-				<string>iOS Team Store Provisioning Profile: com.example.flutterTemplate0510</string>
+				<string>iOS Team Store Provisioning Profile: com.unagipai.boxkeyper</string>
 			</dict>
 			<key>symbols</key>
 			<true/>
