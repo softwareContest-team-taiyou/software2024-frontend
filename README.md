@@ -22,7 +22,7 @@
 
 ## インデックス
 
-- [初期化 1](./docs/init.md)
+- [初期化](./docs/init.md)
 - [ローカルの環境構築](./docs/local-step.md)
 - [ディレクトリ構成](./docs/directly.md)
 - [認証(auth0 の設定)](./docs/auth0.md)
