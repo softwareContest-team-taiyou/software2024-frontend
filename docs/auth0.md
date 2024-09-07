@@ -2,7 +2,7 @@
 
 ## ios の設定
 
-### 1. bundle_id の設定(以下の directly を参照)
+### 1. bundle_id の設定(以下の directly を参照)2
 
 ### 2. Auth0 の設定
 
