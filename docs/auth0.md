@@ -4,7 +4,7 @@
 
 ### 1. bundle_id の設定(以下の directly を参照)
 
-### 2. Auth0 の設定 2
+### 2. Auth0 の設定
 
 1.  Auth0 の Allowed CallBack Urls の設定
 2.  Auth0 の Allowed logout Urls の設定
