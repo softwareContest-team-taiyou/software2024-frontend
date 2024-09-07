@@ -20,7 +20,7 @@
 | データ永続化     | sharedpreference                 |
 | CI/CD            | githubactions Danger             |
 
-## インデックス 2
+## インデックス
 
 - [初期化](./docs/init.md)
 - [ローカルの環境構築](./docs/local-step.md)
