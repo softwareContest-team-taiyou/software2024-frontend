@@ -8,7 +8,7 @@
 	<string>app-store</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.example.flutterTemplate0510</key>  
+		<key>com.Unagipai.BoxKeyPer</key>  
 		<string>flutter_temp0804-2</string>     
 	</dict>
 	<key>signingCertificate</key>

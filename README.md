@@ -1,6 +1,7 @@
-# [ソフトウェアコンテスト2024](https://www.ogis-ri.co.jp/otc/contest/)
-これはソフトウェアコンテスト2024のためのリポジトリです。
-フロントエンドは、flutterで実装し、ios,androidの対応をしています。
+# [ソフトウェアコンテスト 2024](https://www.ogis-ri.co.jp/otc/contest/)
+
+これはソフトウェアコンテスト 2024 のためのリポジトリです。
+フロントエンドは、flutter で実装し、ios,android の対応をしています。
 
 ## エンジニア向けドキュメント
 
@@ -21,7 +22,7 @@
 
 ## インデックス
 
-- [初期化](./docs/init.md)
+- [初期化 1](./docs/init.md)
 - [ローカルの環境構築](./docs/local-step.md)
 - [ディレクトリ構成](./docs/directly.md)
 - [認証(auth0 の設定)](./docs/auth0.md)
