@@ -1,4 +1,6 @@
-# flutter
+# [ソフトウェアコンテスト2024](https://www.ogis-ri.co.jp/otc/contest/)
+これはソフトウェアコンテスト2024のためのリポジトリです。
+フロントエンドは、flutterで実装し、ios,androidの対応をしています。
 
 ## エンジニア向けドキュメント
 
@@ -29,4 +31,3 @@
 - [トラブルシューティング](.docs/trable.md)
 
 # flutter-template
-# software2024-frontend
