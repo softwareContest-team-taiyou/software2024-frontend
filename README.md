@@ -30,5 +30,3 @@
 - [lint の設定](./docs/Lint.md)
 - [テストの書き方](./docs/add-test.md)
 - [トラブルシューティング](.docs/trable.md)
-
-# flutter-template
