@@ -43,6 +43,8 @@ dependencies:
   go_router: ^14.2.1
   auth0_flutter: ^1.1.0
   cider: ^0.2.8
+  protobuf: ^3.1.0
+  grpc: ^4.0.1
 
 dev_dependencies:
   flutter_test:
