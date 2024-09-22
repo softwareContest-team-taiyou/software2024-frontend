@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/domain/auth/repository/auth_repository.dart';
 import 'package:flutter_template/user_interface/pages/auth_page.dart';
+import 'package:flutter_template/user_interface/pages/todo_paga.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
@@ -38,7 +39,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => NoTransitionPage<void>(
           key: state.pageKey,
           restorationId: state.pageKey.value,
-          child: const HomePage(),
+          child: TodosPage(),
         ),
       ),
       GoRoute(

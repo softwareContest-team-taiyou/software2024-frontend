@@ -1,3 +1,4 @@
+import 'package:flutter_template/domain/todo/grpc_service/todo_grpc_service_interface.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../domain/todo/repository/todo_repository.dart';
 
@@ -11,6 +12,7 @@ Future<List<Todo>> findTodosUseCase(FindTodosUseCaseRef ref) async {
 @riverpod
 Future<void> addTodoUseCase(AddTodoUseCaseRef ref, String content) async {
   await ref.read(todosRepositoryProvider).add(Todo(content: content));
+  await ref.read(todoGrpcServiceProvider).add(Todo(content: content));
   // 呼び出す
   ref.invalidate(findTodosUseCaseProvider);
 }
