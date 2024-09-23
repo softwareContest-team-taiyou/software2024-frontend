@@ -1,6 +1,9 @@
 # ディレクトリー構成
-## 以下はlibファルダーの構成
+
+## 以下は lib ファルダーの構成
+
 基本的に開発する時は、[lib](../lib)を変更する。
+
 ```
 .
 ├── domain
@@ -44,60 +47,68 @@
 ```
 
 # 各ディレクトリーの振る舞い
+
 ### lib
+
 - [README](../README.md)にもある通り、開発時は基本的に[lib](../lib/)配下に変更を加える
 
 ### docs
+
 - エンジニア向けのドキュメントはここに追加していく
-- GitHub上で辿りやすいように[READMEのインデックス](../README.md#インデックス)にリンクを貼ること
+- GitHub 上で辿りやすいように[README のインデックス](../README.md#インデックス)にリンクを貼ること
 
 ### domain/〇〇.dart
-- 基本的に〇〇のdomainのmodelを書く。
+
+- 基本的に〇〇の domain の model を書く。
 - [freezard](https://pub.dev/packages/freezed)を使用して、モデルを自動生成する。
 - [クラス自動生成ツール](https://app.quicktype.io/)
 
 ### domain/repository
-- apiやdb,localstorageのなどのデータソースのやり取りを書くフォルダー
 
-### domain/repository/〇〇_reposiroty.dart
+- api や db,localstorage のなどのデータソースのやり取りを書くフォルダー
+
+### domain/repository/〇〇\_reposiroty.dart
+
 - 実装したい抽象クラスを記載。
 
-### domain/repository/〇〇_sharepreference_reposiroty.dart
-- localstorageを叩く際に実装
-- 必ずdomain/repository/〇〇_reposiroty.dartの抽象クラスを実装する実装クラス
+### domain/repository/〇〇\_sharepreference_reposiroty.dart
 
-### domain/repository/〇〇_mock_reposiroty.dart
-- まだapiやlocalstorageが決まっていない時にmockとして叩く方法
+- localstorage を叩く際に実装
+- 必ず domain/repository/〇〇\_reposiroty.dart の抽象クラスを実装する実装クラス
 
-### usecase/〇〇/〇〇_uescase.dart
-- usecase層
+### domain/repository/〇〇\_mock_reposiroty.dart
+
+- まだ api や localstorage が決まっていない時に mock として叩く方法
+
+### usecase/〇〇/〇〇\_uescase.dart
+
+- usecase 層
 - 具体的な業務処理やデータの操作ロジックを書く
 
 ### user_interface/〇〇/page
+
 - 画面
 
 ### user_interface/〇〇/router
-- routerによる画面遷移を記述
+
+- router による画面遷移を記述
 
 ### common/constant
-- 固定urlやテーマ設定、apiのclient設定を記載する場所
-> [!CAUTION]
-> keyなどを載せているときは、必ずgitignoreにすること
 
-
+- 固定 url やテーマ設定、api の client 設定を記載する場所
+  > [!CAUTION]
+  > key などを載せているときは、必ず gitignore にすること
 
 ### widgets
-- アプリで使用する共通で再利用するUIを管理します。
 
+- アプリで使用する共通で再利用する UI を管理します。
 
 ### main.dart
+
 アプリの一番上位(エントリーポイント)となるファイルです。
 以下のようなことを行うことが多いです。
 
 - 画面を縦に固定する
-- Firebaseの初期化処理
-- envファイルの読み込み
-- riverpodのスコープ設定
-
-
-
+- Firebase の初期化処理
+- env ファイルの読み込み
+- riverpod のスコープ設定
