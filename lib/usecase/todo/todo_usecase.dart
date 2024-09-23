@@ -11,7 +11,9 @@ Future<List<Todo>> findTodosUseCase(FindTodosUseCaseRef ref) async {
 
 @riverpod
 Future<void> addTodoUseCase(AddTodoUseCaseRef ref, String content) async {
+  // ローカルリポジトリーに保存
   await ref.read(todosRepositoryProvider).add(Todo(content: content));
+  // 実データベースに保存
   await ref.read(todoGrpcServiceProvider).add(Todo(content: content));
   // 呼び出す
   ref.invalidate(findTodosUseCaseProvider);
@@ -20,5 +22,11 @@ Future<void> addTodoUseCase(AddTodoUseCaseRef ref, String content) async {
 @riverpod
 Future<void> deleteTodoUseCase(DeleteTodoUseCaseRef ref, Todo todo) async {
   await ref.read(todosRepositoryProvider).delete(todo);
+  ref.invalidate(findTodosUseCaseProvider);
+}
+
+@riverpod
+Future<void> initTodoUsecase(InitTodoUseCaseRef ref) async {
+  await ref.read(todosRepositoryProvider).init();
   ref.invalidate(findTodosUseCaseProvider);
 }

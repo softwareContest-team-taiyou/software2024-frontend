@@ -29,6 +29,10 @@ class TodoServiceClient extends $grpc.Client {
       '/proto.todo.v1.TodoService/CreateTodo',
       ($0.CreateTodoRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.CreateTodoResponse.fromBuffer(value));
+  static final _$getAllTodos = $grpc.ClientMethod<$0.GetAllTodosRequest, $0.GetAllTodosResponse>(
+      '/proto.todo.v1.TodoService/GetAllTodos',
+      ($0.GetAllTodosRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.GetAllTodosResponse.fromBuffer(value));
 
   TodoServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -42,6 +46,10 @@ class TodoServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.CreateTodoResponse> createTodo($0.CreateTodoRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createTodo, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.GetAllTodosResponse> getAllTodos($0.GetAllTodosRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAllTodos, request, options: options);
   }
 }
 
@@ -64,6 +72,13 @@ abstract class TodoServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.CreateTodoRequest.fromBuffer(value),
         ($0.CreateTodoResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetAllTodosRequest, $0.GetAllTodosResponse>(
+        'GetAllTodos',
+        getAllTodos_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetAllTodosRequest.fromBuffer(value),
+        ($0.GetAllTodosResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetTodoResponse> getTodo_Pre($grpc.ServiceCall call, $async.Future<$0.GetTodoRequest> request) async {
@@ -74,6 +89,11 @@ abstract class TodoServiceBase extends $grpc.Service {
     return createTodo(call, await request);
   }
 
+  $async.Future<$0.GetAllTodosResponse> getAllTodos_Pre($grpc.ServiceCall call, $async.Future<$0.GetAllTodosRequest> request) async {
+    return getAllTodos(call, await request);
+  }
+
   $async.Future<$0.GetTodoResponse> getTodo($grpc.ServiceCall call, $0.GetTodoRequest request);
   $async.Future<$0.CreateTodoResponse> createTodo($grpc.ServiceCall call, $0.CreateTodoRequest request);
+  $async.Future<$0.GetAllTodosResponse> getAllTodos($grpc.ServiceCall call, $0.GetAllTodosRequest request);
 }

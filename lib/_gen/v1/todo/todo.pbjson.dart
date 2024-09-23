@@ -80,3 +80,25 @@ final $typed_data.Uint8List createTodoRequestDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVUb2RvUmVxdWVzdBIUCgV0aXRsZRgBIAEoCVIFdGl0bGUSIAoLZGVzY3JpcHRpb2'
     '4YAiABKAlSC2Rlc2NyaXB0aW9u');
 
+@$core.Deprecated('Use getAllTodosRequestDescriptor instead')
+const GetAllTodosRequest$json = {
+  '1': 'GetAllTodosRequest',
+};
+
+/// Descriptor for `GetAllTodosRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAllTodosRequestDescriptor = $convert.base64Decode(
+    'ChJHZXRBbGxUb2Rvc1JlcXVlc3Q=');
+
+@$core.Deprecated('Use getAllTodosResponseDescriptor instead')
+const GetAllTodosResponse$json = {
+  '1': 'GetAllTodosResponse',
+  '2': [
+    {'1': 'todos', '3': 1, '4': 3, '5': 11, '6': '.proto.todo.v1.GetTodoResponse', '10': 'todos'},
+  ],
+};
+
+/// Descriptor for `GetAllTodosResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAllTodosResponseDescriptor = $convert.base64Decode(
+    'ChNHZXRBbGxUb2Rvc1Jlc3BvbnNlEjQKBXRvZG9zGAEgAygLMh4ucHJvdG8udG9kby52MS5HZX'
+    'RUb2RvUmVzcG9uc2VSBXRvZG9z');
+

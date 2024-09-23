@@ -6,6 +6,7 @@ export '../todo.dart';
 
 abstract class TodoGrpcServiceInterface<T> {
   Future<bool> add(T item);
+  Future<List<Todo>> findAll();
 }
 
 final todoGrpcServiceProvider =

@@ -263,6 +263,82 @@ class CreateTodoRequest extends $pb.GeneratedMessage {
   void clearDescription() => clearField(2);
 }
 
+class GetAllTodosRequest extends $pb.GeneratedMessage {
+  factory GetAllTodosRequest() => create();
+  GetAllTodosRequest._() : super();
+  factory GetAllTodosRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAllTodosRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAllTodosRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'proto.todo.v1'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAllTodosRequest clone() => GetAllTodosRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAllTodosRequest copyWith(void Function(GetAllTodosRequest) updates) => super.copyWith((message) => updates(message as GetAllTodosRequest)) as GetAllTodosRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetAllTodosRequest create() => GetAllTodosRequest._();
+  GetAllTodosRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAllTodosRequest> createRepeated() => $pb.PbList<GetAllTodosRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAllTodosRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAllTodosRequest>(create);
+  static GetAllTodosRequest? _defaultInstance;
+}
+
+class GetAllTodosResponse extends $pb.GeneratedMessage {
+  factory GetAllTodosResponse({
+    $core.Iterable<GetTodoResponse>? todos,
+  }) {
+    final $result = create();
+    if (todos != null) {
+      $result.todos.addAll(todos);
+    }
+    return $result;
+  }
+  GetAllTodosResponse._() : super();
+  factory GetAllTodosResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAllTodosResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAllTodosResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'proto.todo.v1'), createEmptyInstance: create)
+    ..pc<GetTodoResponse>(1, _omitFieldNames ? '' : 'todos', $pb.PbFieldType.PM, subBuilder: GetTodoResponse.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAllTodosResponse clone() => GetAllTodosResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAllTodosResponse copyWith(void Function(GetAllTodosResponse) updates) => super.copyWith((message) => updates(message as GetAllTodosResponse)) as GetAllTodosResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetAllTodosResponse create() => GetAllTodosResponse._();
+  GetAllTodosResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAllTodosResponse> createRepeated() => $pb.PbList<GetAllTodosResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAllTodosResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAllTodosResponse>(create);
+  static GetAllTodosResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<GetTodoResponse> get todos => $_getList(0);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

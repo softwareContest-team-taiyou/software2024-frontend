@@ -17,16 +17,16 @@ class Status extends $pb.ProtobufEnum {
   static const Status SUCCESS = Status._(0, _omitEnumNames ? '' : 'SUCCESS');
   static const Status FAILURE = Status._(1, _omitEnumNames ? '' : 'FAILURE');
 
-  static const $core.List<Status> values = <Status>[
+  static const $core.List<Status> values = <Status> [
     SUCCESS,
     FAILURE,
   ];
 
-  static final $core.Map<$core.int, Status> _byValue =
-      $pb.ProtobufEnum.initByValue(values);
+  static final $core.Map<$core.int, Status> _byValue = $pb.ProtobufEnum.initByValue(values);
   static Status? valueOf($core.int value) => _byValue[value];
 
   const Status._($core.int v, $core.String n) : super(v, n);
 }
+
 
 const _omitEnumNames = $core.bool.fromEnvironment('protobuf.omit_enum_names');
