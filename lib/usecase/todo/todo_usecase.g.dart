@@ -298,20 +298,20 @@ class _DeleteTodoUseCaseProviderElement
   Todo get todo => (origin as DeleteTodoUseCaseProvider).todo;
 }
 
-String _$initTodoUsecaseHash() => r'e94246915e686961a153da9f76496a47d1ad798a';
+String _$initTodoUseCaseHash() => r'7b2c07cf523e59b8a07a4619f22bb51fe815ce62';
 
-/// See also [initTodoUsecase].
-@ProviderFor(initTodoUsecase)
-final initTodoUsecaseProvider = AutoDisposeFutureProvider<void>.internal(
-  initTodoUsecase,
-  name: r'initTodoUsecaseProvider',
+/// See also [initTodoUseCase].
+@ProviderFor(initTodoUseCase)
+final initTodoUseCaseProvider = AutoDisposeFutureProvider<void>.internal(
+  initTodoUseCase,
+  name: r'initTodoUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$initTodoUsecaseHash,
+      : _$initTodoUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef InitTodoUsecaseRef = AutoDisposeFutureProviderRef<void>;
+typedef InitTodoUseCaseRef = AutoDisposeFutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

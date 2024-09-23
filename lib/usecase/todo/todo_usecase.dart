@@ -26,7 +26,8 @@ Future<void> deleteTodoUseCase(DeleteTodoUseCaseRef ref, Todo todo) async {
 }
 
 @riverpod
-Future<void> initTodoUsecase(InitTodoUseCaseRef ref) async {
-  await ref.read(todosRepositoryProvider).init();
+Future<void> initTodoUseCase(InitTodoUseCaseRef ref) async {
+  final grpcData = await ref.read(todoGrpcServiceProvider).findAll();
+  await ref.read(todosRepositoryProvider).init(grpcData);
   ref.invalidate(findTodosUseCaseProvider);
 }

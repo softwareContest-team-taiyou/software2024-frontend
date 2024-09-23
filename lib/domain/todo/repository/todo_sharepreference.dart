@@ -35,4 +35,12 @@ class SharedPreferencesTodosRepository implements TodoRepository<Todo> {
     // スタブ
     return true;
   }
+
+  @override
+  Future<bool> init(List<Todo> item) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final items = item.map((item) => item.content).toList(growable: true);
+    await sharedPreferences.setStringList(sharedPreferencesKey, items);
+    return true;
+  }
 }

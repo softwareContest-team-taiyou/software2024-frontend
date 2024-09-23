@@ -4,58 +4,68 @@ import 'package:flutter_template/usecase/todo/todo_usecase.dart';
 
 import '../../../domain/todo/todo.dart';
 
-class TodosPage extends ConsumerWidget {
+class TodosPage extends ConsumerStatefulWidget {
   TodosPage({super.key});
 
+  @override
+  _TodosPageState createState() => _TodosPageState();
+}
+
+class _TodosPageState extends ConsumerState<TodosPage> {
   final TextEditingController controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () => ref.read(initTodoUseCaseProvider),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final todos = ref.watch(findTodosUseCaseProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('やること'),
       ),
-      body: switch (todos) {
-        AsyncData(:final value) => ListView.builder(
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return ListTile(
-                  title: TextField(
-                    controller: controller,
-                    onSubmitted: (value) {
-                      addTodo(ref, value);
-                    },
-                  ),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      addTodo(ref, controller.text);
-                    },
-                    child: const Text('保存'),
-                  ),
-                );
-              }
-              final todo = value[index - 1];
-              // return ListTile(
-              //   title: Text(todo.content),
-              // );
-              return Dismissible(
-                key: UniqueKey(),
-                onDismissed: (direction) {
-                  deleteTodo(ref, todo); // 削除処理
-                },
-                child: ListTile(
-                  title: Text(todo.content),
+      body: todos.when(
+        data: (value) => ListView.builder(
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return ListTile(
+                title: TextField(
+                  controller: controller,
+                  onSubmitted: (value) {
+                    addTodo(ref, value);
+                  },
+                ),
+                trailing: ElevatedButton(
+                  onPressed: () {
+                    addTodo(ref, controller.text);
+                  },
+                  child: const Text('保存'),
                 ),
               );
-            },
-            itemCount: value.length + 1,
-          ),
-        AsyncError() => const Center(
-            child: Text('読み込みエラー'),
-          ),
-        _ => const CircularProgressIndicator(),
-      },
+            }
+            final todo = value[index - 1];
+            return Dismissible(
+              key: UniqueKey(),
+              onDismissed: (direction) {
+                deleteTodo(ref, todo);
+              },
+              child: ListTile(
+                title: Text(todo.content),
+              ),
+            );
+          },
+          itemCount: value.length + 1,
+        ),
+        error: (error, stackTrace) => Center(
+          child: Text('読み込みエラー: $error'),
+        ),
+        loading: () => const CircularProgressIndicator(),
+      ),
     );
   }
 

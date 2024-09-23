@@ -30,4 +30,9 @@ class MockTodosRepository implements TodoRepository<Todo> {
     // スタブ
     return true;
   }
+
+  Future<bool> init(List<Todo> item) async {
+    // スタブ
+    return true;
+  }
 }

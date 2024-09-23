@@ -25,14 +25,21 @@ class TodoGrpcService implements TodoGrpcServiceInterface<Todo> {
     }
   }
 
+  @override
   Future<List<Todo>> findAll() async {
     final chanel = ref.read(grpcChannelProvider);
     final client = TodoServiceClient(chanel);
     try {
-      final request = ListTodoRequest();
+      final request = GetAllTodosRequest();
       // Call the gRPC service method
-      final response = await client.listTodo(request);
-      return response.todos; // Return the list of items
+      final response = await client.getAllTodos(request);
+      // You can transform the data here if needed, for example:
+      List<Todo> todos = response.todos.map((todo) {
+        return Todo(
+          content: todo.title,
+        );
+      }).toList();
+      return todos; // Return the list of items
     } catch (e) {
       print(e);
       return []; // Return an empty list if there is an error
