@@ -23,7 +23,6 @@ mixin _$Auth {
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
   String get idToken => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,11 +34,7 @@ abstract class $AuthCopyWith<$Res> {
   factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
       _$AuthCopyWithImpl<$Res, Auth>;
   @useResult
-  $Res call(
-      {String accessToken,
-      String refreshToken,
-      String idToken,
-      String tokenType});
+  $Res call({String accessToken, String refreshToken, String idToken});
 }
 
 /// @nodoc
@@ -58,7 +53,6 @@ class _$AuthCopyWithImpl<$Res, $Val extends Auth>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? idToken = null,
-    Object? tokenType = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
@@ -73,10 +67,6 @@ class _$AuthCopyWithImpl<$Res, $Val extends Auth>
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
               as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -88,11 +78,7 @@ abstract class _$$AuthImplCopyWith<$Res> implements $AuthCopyWith<$Res> {
       __$$AuthImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String accessToken,
-      String refreshToken,
-      String idToken,
-      String tokenType});
+  $Res call({String accessToken, String refreshToken, String idToken});
 }
 
 /// @nodoc
@@ -108,7 +94,6 @@ class __$$AuthImplCopyWithImpl<$Res>
     Object? accessToken = null,
     Object? refreshToken = null,
     Object? idToken = null,
-    Object? tokenType = null,
   }) {
     return _then(_$AuthImpl(
       accessToken: null == accessToken
@@ -123,10 +108,6 @@ class __$$AuthImplCopyWithImpl<$Res>
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
               as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -137,8 +118,7 @@ class _$AuthImpl implements _Auth {
   const _$AuthImpl(
       {required this.accessToken,
       required this.refreshToken,
-      required this.idToken,
-      required this.tokenType});
+      required this.idToken});
 
   factory _$AuthImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthImplFromJson(json);
@@ -149,12 +129,10 @@ class _$AuthImpl implements _Auth {
   final String refreshToken;
   @override
   final String idToken;
-  @override
-  final String tokenType;
 
   @override
   String toString() {
-    return 'Auth(accessToken: $accessToken, refreshToken: $refreshToken, idToken: $idToken, tokenType: $tokenType)';
+    return 'Auth(accessToken: $accessToken, refreshToken: $refreshToken, idToken: $idToken)';
   }
 
   @override
@@ -166,15 +144,13 @@ class _$AuthImpl implements _Auth {
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
                 other.refreshToken == refreshToken) &&
-            (identical(other.idToken, idToken) || other.idToken == idToken) &&
-            (identical(other.tokenType, tokenType) ||
-                other.tokenType == tokenType));
+            (identical(other.idToken, idToken) || other.idToken == idToken));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, accessToken, refreshToken, idToken, tokenType);
+      Object.hash(runtimeType, accessToken, refreshToken, idToken);
 
   @JsonKey(ignore: true)
   @override
@@ -194,8 +170,7 @@ abstract class _Auth implements Auth {
   const factory _Auth(
       {required final String accessToken,
       required final String refreshToken,
-      required final String idToken,
-      required final String tokenType}) = _$AuthImpl;
+      required final String idToken}) = _$AuthImpl;
 
   factory _Auth.fromJson(Map<String, dynamic> json) = _$AuthImpl.fromJson;
 
@@ -205,8 +180,6 @@ abstract class _Auth implements Auth {
   String get refreshToken;
   @override
   String get idToken;
-  @override
-  String get tokenType;
   @override
   @JsonKey(ignore: true)
   _$$AuthImplCopyWith<_$AuthImpl> get copyWith =>

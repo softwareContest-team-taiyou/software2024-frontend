@@ -10,7 +10,7 @@ class Auth with _$Auth {
     required String accessToken,
     required String refreshToken,
     required String idToken,
-    required String tokenType,
+    // required String tokenType,
     // required DateTime expiresIn,
   }) = _Auth;
 
@@ -27,7 +27,7 @@ class Auth with _$Auth {
       accessToken: credential.accessToken as String,
       refreshToken: credential.refreshToken as String,
       idToken: credential.idToken as String,
-      tokenType: credential.tokenType as String,
+      // tokenType: credential.tokenType as String,
       // expiresIn:
       //     DateTime.now().add(Duration(seconds: credential.expiresIn as int)),
     );
