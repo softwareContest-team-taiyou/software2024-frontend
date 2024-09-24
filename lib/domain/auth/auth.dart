@@ -8,7 +8,7 @@ part 'auth.g.dart';
 class Auth with _$Auth {
   const factory Auth({
     required String accessToken,
-    required String refreshToken,
+    // required String refreshToken,
     required String idToken,
     // required String tokenType,
     // required DateTime expiresIn,
@@ -25,7 +25,7 @@ class Auth with _$Auth {
   factory Auth.fromAuth0Credentials(dynamic credential) {
     return Auth(
       accessToken: credential.accessToken as String,
-      refreshToken: credential.refreshToken as String,
+      // refreshToken: credential.refreshToken as String,
       idToken: credential.idToken as String,
       // tokenType: credential.tokenType as String,
       // expiresIn:

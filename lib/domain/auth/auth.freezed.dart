@@ -20,8 +20,8 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Auth {
-  String get accessToken => throw _privateConstructorUsedError;
-  String get refreshToken => throw _privateConstructorUsedError;
+  String get accessToken =>
+      throw _privateConstructorUsedError; // required String refreshToken,
   String get idToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $AuthCopyWith<$Res> {
   factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
       _$AuthCopyWithImpl<$Res, Auth>;
   @useResult
-  $Res call({String accessToken, String refreshToken, String idToken});
+  $Res call({String accessToken, String idToken});
 }
 
 /// @nodoc
@@ -51,17 +51,12 @@ class _$AuthCopyWithImpl<$Res, $Val extends Auth>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
     Object? idToken = null,
   }) {
     return _then(_value.copyWith(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
       idToken: null == idToken
           ? _value.idToken
@@ -78,7 +73,7 @@ abstract class _$$AuthImplCopyWith<$Res> implements $AuthCopyWith<$Res> {
       __$$AuthImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken, String idToken});
+  $Res call({String accessToken, String idToken});
 }
 
 /// @nodoc
@@ -92,17 +87,12 @@ class __$$AuthImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessToken = null,
-    Object? refreshToken = null,
     Object? idToken = null,
   }) {
     return _then(_$AuthImpl(
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
       idToken: null == idToken
           ? _value.idToken
@@ -115,24 +105,20 @@ class __$$AuthImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthImpl implements _Auth {
-  const _$AuthImpl(
-      {required this.accessToken,
-      required this.refreshToken,
-      required this.idToken});
+  const _$AuthImpl({required this.accessToken, required this.idToken});
 
   factory _$AuthImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthImplFromJson(json);
 
   @override
   final String accessToken;
-  @override
-  final String refreshToken;
+// required String refreshToken,
   @override
   final String idToken;
 
   @override
   String toString() {
-    return 'Auth(accessToken: $accessToken, refreshToken: $refreshToken, idToken: $idToken)';
+    return 'Auth(accessToken: $accessToken, idToken: $idToken)';
   }
 
   @override
@@ -142,15 +128,12 @@ class _$AuthImpl implements _Auth {
             other is _$AuthImpl &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken) &&
             (identical(other.idToken, idToken) || other.idToken == idToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, accessToken, refreshToken, idToken);
+  int get hashCode => Object.hash(runtimeType, accessToken, idToken);
 
   @JsonKey(ignore: true)
   @override
@@ -169,16 +152,13 @@ class _$AuthImpl implements _Auth {
 abstract class _Auth implements Auth {
   const factory _Auth(
       {required final String accessToken,
-      required final String refreshToken,
       required final String idToken}) = _$AuthImpl;
 
   factory _Auth.fromJson(Map<String, dynamic> json) = _$AuthImpl.fromJson;
 
   @override
   String get accessToken;
-  @override
-  String get refreshToken;
-  @override
+  @override // required String refreshToken,
   String get idToken;
   @override
   @JsonKey(ignore: true)

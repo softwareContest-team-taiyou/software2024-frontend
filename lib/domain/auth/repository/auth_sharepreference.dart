@@ -11,11 +11,13 @@ class SharedPreferencesAuthRepository implements AuthRepository<Auth> {
   Future<bool> registerAuth(Auth auth) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     // auth オブジェクトを JSON 形式に変換して保存
+    print(auth);
     final authJson = jsonEncode({
       'accessToken': auth.accessToken,
-      'refreshToken': auth.refreshToken,
+      // 'refreshToken': auth.refreshToken,
       'idToken': auth.idToken,
     });
+
     return await sharedPreferences.setString(sharedPreferencesKey, authJson);
   }
 

@@ -8,13 +8,20 @@ part 'auth_usecase.g.dart';
 
 @riverpod
 Future<void> loginUseCase(LoginUseCaseRef ref) async {
-  var credential = await auth0.webAuthentication().login();
-  // credentialをAuthに変換
-  final auth = Auth.fromAuth0Credentials(credential);
-  // shared_preferencesに保存
-  await ref.read(authRepositoryProvider).registerAuth(auth);
-  // ここのproviderのみrouterで定義
-  ref.invalidate(checkLoggedInUseCaseProvider);
+  try {
+    var credential =
+        await auth0.webAuthentication().login(audience: 'software');
+    // credentialをAuthに変換
+    final auth = Auth.fromAuth0Credentials(credential);
+    // shared_preferencesに保存
+    await ref.read(authRepositoryProvider).registerAuth(auth);
+    // ここのproviderのみrouterで定義
+    ref.invalidate(checkLoggedInUseCaseProvider);
+  } catch (e) {
+    print("Login Failed: $e");
+    return; // エラーが発生したら早期リターン
+  }
+  ;
 }
 
 @riverpod
