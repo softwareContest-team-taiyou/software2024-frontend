@@ -39,6 +39,7 @@ class SharedPreferencesAuthRepository implements AuthRepository<Auth> {
 
   @override
   Future<bool> checkAuth() async {
+    print("repositoryがgetAuthが呼ばれている");
     final sharedPreferences = await SharedPreferences.getInstance();
     final authString = sharedPreferences.getString(sharedPreferencesKey);
     if (authString == null) {

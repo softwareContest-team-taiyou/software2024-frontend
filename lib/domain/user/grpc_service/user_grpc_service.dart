@@ -11,7 +11,7 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
   UserGrpcService(this.ref);
 
   @override
-  Future<bool> createUser(User item) async {
+  Future<bool> createUser() async {
     final chanel = ref.read(grpcChannelProvider);
     final option = await ref.read(authRepositoryProvider).getAccessToken();
 
@@ -40,6 +40,7 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
       final user = User(
         name: response.name,
       );
+      print(user);
       return user; // Return the list of items
     } catch (e) {
       print(e);

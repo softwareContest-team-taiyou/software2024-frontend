@@ -5,7 +5,7 @@ import '../user.dart';
 export '../user.dart';
 
 abstract class UserRepository<T> {
-  Future<bool> createUser(T item);
+  Future<bool> createUser();
   Future<User> getUser();
 }
 
