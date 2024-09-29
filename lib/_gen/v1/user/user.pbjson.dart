@@ -69,3 +69,28 @@ final $typed_data.Uint8List createUserResponseDescriptor = $convert.base64Decode
     'ChJDcmVhdGVVc2VyUmVzcG9uc2USLQoGc3RhdHVzGAEgASgOMhUucHJvdG8udXNlci52MS5TdG'
     'F0dXNSBnN0YXR1cw==');
 
+@$core.Deprecated('Use updateUserRequestDescriptor instead')
+const UpdateUserRequest$json = {
+  '1': 'UpdateUserRequest',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+  ],
+};
+
+/// Descriptor for `UpdateUserRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateUserRequestDescriptor = $convert.base64Decode(
+    'ChFVcGRhdGVVc2VyUmVxdWVzdBISCgRuYW1lGAEgASgJUgRuYW1l');
+
+@$core.Deprecated('Use updateUserResponseDescriptor instead')
+const UpdateUserResponse$json = {
+  '1': 'UpdateUserResponse',
+  '2': [
+    {'1': 'status', '3': 1, '4': 1, '5': 14, '6': '.proto.user.v1.Status', '10': 'status'},
+  ],
+};
+
+/// Descriptor for `UpdateUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateUserResponseDescriptor = $convert.base64Decode(
+    'ChJVcGRhdGVVc2VyUmVzcG9uc2USLQoGc3RhdHVzGAEgASgOMhUucHJvdG8udXNlci52MS5TdG'
+    'F0dXNSBnN0YXR1cw==');
+

@@ -47,4 +47,23 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
       return User(name: ''); // Return an empty list if there is an error
     }
   }
+
+  @override
+  Future<bool> updateUser(User item) async {
+    final chanel = ref.read(grpcChannelProvider);
+    final option = await ref.read(authRepositoryProvider).getAccessToken();
+
+    final client = UserServiceClient(chanel);
+    print("servicenihaitteru");
+    try {
+      final request = UpdateUserRequest()..name = item.name;
+      // Call the gRPC service method
+      final response = await client.updateUser(request, options: option);
+      print(response.status);
+      return true; // Return true if the item is added successfully
+    } catch (e) {
+      print(e);
+      return false; // Return false if there is an error
+    }
+  }
 }

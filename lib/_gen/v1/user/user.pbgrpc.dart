@@ -29,6 +29,10 @@ class UserServiceClient extends $grpc.Client {
       '/proto.user.v1.UserService/GetUser',
       ($0.GetUserRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.GetUserResponse.fromBuffer(value));
+  static final _$updateUser = $grpc.ClientMethod<$0.UpdateUserRequest, $0.UpdateUserResponse>(
+      '/proto.user.v1.UserService/UpdateUser',
+      ($0.UpdateUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.UpdateUserResponse.fromBuffer(value));
 
   UserServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -42,6 +46,10 @@ class UserServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$0.GetUserResponse> getUser($0.GetUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUser, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.UpdateUserResponse> updateUser($0.UpdateUserRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateUser, request, options: options);
   }
 }
 
@@ -64,6 +72,13 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetUserRequest.fromBuffer(value),
         ($0.GetUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.UpdateUserRequest, $0.UpdateUserResponse>(
+        'UpdateUser',
+        updateUser_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.UpdateUserRequest.fromBuffer(value),
+        ($0.UpdateUserResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.CreateUserResponse> createUser_Pre($grpc.ServiceCall call, $async.Future<$0.CreateUserRequest> request) async {
@@ -74,6 +89,11 @@ abstract class UserServiceBase extends $grpc.Service {
     return getUser(call, await request);
   }
 
+  $async.Future<$0.UpdateUserResponse> updateUser_Pre($grpc.ServiceCall call, $async.Future<$0.UpdateUserRequest> request) async {
+    return updateUser(call, await request);
+  }
+
   $async.Future<$0.CreateUserResponse> createUser($grpc.ServiceCall call, $0.CreateUserRequest request);
   $async.Future<$0.GetUserResponse> getUser($grpc.ServiceCall call, $0.GetUserRequest request);
+  $async.Future<$0.UpdateUserResponse> updateUser($grpc.ServiceCall call, $0.UpdateUserRequest request);
 }

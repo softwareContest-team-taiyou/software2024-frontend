@@ -7,6 +7,7 @@ export '../user.dart';
 abstract class UserGrpcServiceInterface<T> {
   Future<bool> createUser();
   Future<User> getUser();
+  Future<bool> updateUser(T item);
 }
 
 final userGrpcServiceProvider =
