@@ -4,7 +4,6 @@ import 'package:flutter_template/domain/user/grpc_service/user_grpc_service_inte
 import 'package:flutter_template/domain/user/repository/user_repository.dart';
 import 'package:flutter_template/user_interface/pages/auth_page.dart';
 import 'package:flutter_template/user_interface/pages/register_page.dart';
-import 'package:flutter_template/user_interface/pages/todo_paga.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
@@ -30,9 +29,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/login/redirection',
         name: 'login-redirection',
         redirect: (context, state) {
-          // Corrected to include both parameters
-          print("ログインリダイレクトは呼ばれている");
+          // Corrected to include both parameterså
+          // localリポジトリーで判断している
           final isLoggedIn = ref.watch(checkLoggedInUseCaseProvider);
+          // grpcで判断している
           final user = ref.watch(checkNameInUseCaseProvider);
           return isLoggedIn.when(
             data: (isLoggedIn) {

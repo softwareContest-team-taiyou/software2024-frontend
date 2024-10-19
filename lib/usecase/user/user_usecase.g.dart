@@ -21,7 +21,7 @@ final getUserUseCaseProvider = AutoDisposeFutureProvider<User>.internal(
 );
 
 typedef GetUserUseCaseRef = AutoDisposeFutureProviderRef<User>;
-String _$updateUserUseCaseHash() => r'a6bd568e07d0f11e2e3f85b92360a07e5b31b1a6';
+String _$updateUserUseCaseHash() => r'366dd90a3fc04b47cd69f8877f84245e47c8b8fe';
 
 /// Copied from Dart SDK
 class _SystemHash {

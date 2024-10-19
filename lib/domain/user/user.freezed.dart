@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$User {
   String get name => throw _privateConstructorUsedError;
+  bool get isInit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +28,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({String name});
+  $Res call({String name, bool isInit});
 }
 
 /// @nodoc
@@ -44,12 +45,17 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? name = null,
+    Object? isInit = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isInit: null == isInit
+          ? _value.isInit
+          : isInit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -61,7 +67,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({String name, bool isInit});
 }
 
 /// @nodoc
@@ -75,12 +81,17 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? isInit = null,
   }) {
     return _then(_$UserImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isInit: null == isInit
+          ? _value.isInit
+          : isInit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -88,14 +99,16 @@ class __$$UserImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserImpl implements _User {
-  const _$UserImpl({required this.name});
+  const _$UserImpl({required this.name, required this.isInit});
 
   @override
   final String name;
+  @override
+  final bool isInit;
 
   @override
   String toString() {
-    return 'User(name: $name)';
+    return 'User(name: $name, isInit: $isInit)';
   }
 
   @override
@@ -103,11 +116,12 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.isInit, isInit) || other.isInit == isInit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(runtimeType, name, isInit);
 
   @JsonKey(ignore: true)
   @override
@@ -117,10 +131,13 @@ class _$UserImpl implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({required final String name}) = _$UserImpl;
+  const factory _User(
+      {required final String name, required final bool isInit}) = _$UserImpl;
 
   @override
   String get name;
+  @override
+  bool get isInit;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

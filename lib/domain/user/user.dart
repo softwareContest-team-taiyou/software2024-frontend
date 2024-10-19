@@ -6,5 +6,6 @@ part 'user.freezed.dart';
 class User with _$User {
   const factory User({
     required String name,
+    required bool isInit,
   }) = _User;
 }

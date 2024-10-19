@@ -11,6 +11,8 @@ Future<User> getUserUseCase(GetUserUseCaseRef ref) async {
 
 @riverpod
 Future<void> updateUserUseCase(UpdateUserUseCaseRef ref, String content) async {
-  await ref.read(userGrpcServiceProvider).updateUser(User(name: content));
+  await ref
+      .read(userGrpcServiceProvider)
+      .updateUser(User(name: content, isInit: false));
   ref.invalidate(getUserUseCaseProvider);
 }

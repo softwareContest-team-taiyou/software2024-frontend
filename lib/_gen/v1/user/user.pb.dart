@@ -52,10 +52,14 @@ class GetUserRequest extends $pb.GeneratedMessage {
 class GetUserResponse extends $pb.GeneratedMessage {
   factory GetUserResponse({
     $core.String? name,
+    $core.bool? isInit,
   }) {
     final $result = create();
     if (name != null) {
       $result.name = name;
+    }
+    if (isInit != null) {
+      $result.isInit = isInit;
     }
     return $result;
   }
@@ -65,6 +69,7 @@ class GetUserResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'proto.user.v1'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOB(2, _omitFieldNames ? '' : 'isInit')
     ..hasRequiredFields = false
   ;
 
@@ -97,6 +102,15 @@ class GetUserResponse extends $pb.GeneratedMessage {
   $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
   void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get isInit => $_getBF(1);
+  @$pb.TagNumber(2)
+  set isInit($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsInit() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsInit() => clearField(2);
 }
 
 class CreateUserRequest extends $pb.GeneratedMessage {

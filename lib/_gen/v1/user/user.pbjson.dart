@@ -40,12 +40,14 @@ const GetUserResponse$json = {
   '1': 'GetUserResponse',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'is_init', '3': 2, '4': 1, '5': 8, '10': 'isInit'},
   ],
 };
 
 /// Descriptor for `GetUserResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getUserResponseDescriptor = $convert.base64Decode(
-    'Cg9HZXRVc2VyUmVzcG9uc2USEgoEbmFtZRgBIAEoCVIEbmFtZQ==');
+    'Cg9HZXRVc2VyUmVzcG9uc2USEgoEbmFtZRgBIAEoCVIEbmFtZRIXCgdpc19pbml0GAIgASgIUg'
+    'Zpc0luaXQ=');
 
 @$core.Deprecated('Use createUserRequestDescriptor instead')
 const CreateUserRequest$json = {

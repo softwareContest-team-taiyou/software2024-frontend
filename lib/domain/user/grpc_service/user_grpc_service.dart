@@ -39,12 +39,13 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
       // You can transform the data here if needed, for example:
       final user = User(
         name: response.name,
+        isInit: response.isInit,
       );
       print(user);
       return user; // Return the list of items
     } catch (e) {
-      print(e);
-      return User(name: ''); // Return an empty list if there is an error
+      return User(
+          name: '', isInit: false); // Return an empty list if there is an error
     }
   }
 
