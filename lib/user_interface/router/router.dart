@@ -63,7 +63,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => NoTransitionPage<void>(
           key: state.pageKey,
           restorationId: state.pageKey.value,
-          child: TodosPage(),
+          child: HomePage(),
         ),
       ),
       GoRoute(

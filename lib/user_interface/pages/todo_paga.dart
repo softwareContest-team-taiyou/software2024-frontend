@@ -1,80 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_template/usecase/todo/todo_usecase.dart';
+import 'package:flutter_template/usecase/auth/auth_usecase.dart';
+import 'package:go_router/go_router.dart';
+//「routed」はプロジェクト名です。
 
-import '../../../domain/todo/todo.dart';
-
-class TodosPage extends ConsumerStatefulWidget {
-  TodosPage({super.key});
-
-  @override
-  _TodosPageState createState() => _TodosPageState();
-}
-
-class _TodosPageState extends ConsumerState<TodosPage> {
-  final TextEditingController controller = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-      () => ref.read(initTodoUseCaseProvider),
-    );
+class TodoPage extends ConsumerWidget {
+  const TodoPage({super.key});
+  void logout(WidgetRef ref, BuildContext context) {
+    ref.read(logoutUseCaseProvider);
   }
 
   @override
-  Widget build(BuildContext context) {
-    final todos = ref.watch(findTodosUseCaseProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('やること'),
-      ),
-      body: todos.when(
-        data: (value) => ListView.builder(
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return ListTile(
-                title: TextField(
-                  controller: controller,
-                  onSubmitted: (value) {
-                    addTodo(ref, value);
-                  },
-                ),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    addTodo(ref, controller.text);
-                  },
-                  child: const Text('保存'),
-                ),
-              );
-            }
-            final todo = value[index - 1];
-            return Dismissible(
-              key: UniqueKey(),
-              onDismissed: (direction) {
-                deleteTodo(ref, todo);
+        title: const Text('ホーム'),
+        actions: [
+          TextButton(
+              onPressed: () async {
+                logout(ref, context);
               },
-              child: ListTile(
-                title: Text(todo.content),
-              ),
-            );
-          },
-          itemCount: value.length + 1,
+              child: const Text('ログアウト'))
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  context.push('/detail/A');
+                },
+                child: const Text('Aを閲覧する')),
+            ElevatedButton(
+                onPressed: () {
+                  context.push('/detail/B');
+                },
+                child: const Text('Bを閲覧する')),
+            ElevatedButton(
+                onPressed: () {
+                  context.push('/detail/C');
+                },
+                child: const Text('Cを閲覧する')),
+          ],
         ),
-        error: (error, stackTrace) => Center(
-          child: Text('読み込みエラー: $error'),
-        ),
-        loading: () => const CircularProgressIndicator(),
       ),
     );
-  }
-
-  void addTodo(WidgetRef ref, String value) {
-    ref.read(addTodoUseCaseProvider(value));
-    controller.clear();
-  }
-
-  void deleteTodo(WidgetRef ref, Todo todo) {
-    ref.read(deleteTodoUseCaseProvider(todo));
   }
 }
