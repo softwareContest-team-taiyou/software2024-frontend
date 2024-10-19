@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/domain/auth/repository/auth_repository.dart';
 import 'package:flutter_template/domain/auth/repository/auth_sharepreference.dart';
+import 'package:flutter_template/domain/box/grpc_service/box_grpc_service.dart';
+import 'package:flutter_template/domain/box/grpc_service/box_grpc_service_interface.dart';
 import 'package:flutter_template/domain/boxkey/grpc_service/boxkey_grpc_service.dart';
 import 'package:flutter_template/domain/boxkey/grpc_service/boxkey_grpc_service_interface.dart';
 import 'package:flutter_template/domain/user/grpc_service/user_grpc_service.dart';
@@ -24,6 +26,9 @@ void main() {
         ),
         boxKeyGrpcServiceProvider.overrideWithProvider(
           Provider((ref) => BoxKeyGrpcService(ref)),
+        ),
+        boxGrpcServiceProvider.overrideWithProvider(
+          Provider((ref) => BoxGrpcService(ref)),
         ),
 
         // todosRepositoryProvider.overrideWithValue(MockTodosRepository()),
