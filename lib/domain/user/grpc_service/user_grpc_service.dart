@@ -41,7 +41,6 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
         name: response.name,
         isInit: response.isInit,
       );
-      print(user);
       return user; // Return the list of items
     } catch (e) {
       return User(
@@ -55,7 +54,6 @@ class UserGrpcService implements UserGrpcServiceInterface<User> {
     final option = await ref.read(authRepositoryProvider).getAccessToken();
 
     final client = UserServiceClient(chanel);
-    print("servicenihaitteru");
     try {
       final request = UpdateUserRequest()..name = item.name;
       // Call the gRPC service method

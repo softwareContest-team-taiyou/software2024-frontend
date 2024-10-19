@@ -14,6 +14,7 @@ Future<void> loginUseCase(LoginUseCaseRef ref) async {
         await auth0.webAuthentication().login(audience: 'software');
     // credentialをAuthに変換
     final auth = Auth.fromAuth0Credentials(credential);
+    print("作られているか確認");
     // shared_preferencesに保存
     await ref.read(authRepositoryProvider).registerAuth(auth);
     await ref.read(userGrpcServiceProvider).createUser();
@@ -21,8 +22,6 @@ Future<void> loginUseCase(LoginUseCaseRef ref) async {
     ref.invalidate(checkLoggedInUseCaseProvider);
     ref.invalidate(checkNameInUseCaseProvider);
   } catch (e) {
-    print("ここでエラーが出ている");
-    print("Login Failed: $e");
     return; // エラーが発生したら早期リターン
   }
   ;

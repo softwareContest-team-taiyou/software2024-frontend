@@ -11,7 +11,6 @@ class SharedPreferencesAuthRepository implements AuthRepository<Auth> {
   Future<bool> registerAuth(Auth auth) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     // auth オブジェクトを JSON 形式に変換して保存
-    print(auth);
     final authJson = jsonEncode({
       'accessToken': auth.accessToken,
       // 'refreshToken': auth.refreshToken,
@@ -39,7 +38,6 @@ class SharedPreferencesAuthRepository implements AuthRepository<Auth> {
 
   @override
   Future<bool> checkAuth() async {
-    print("repositoryがgetAuthが呼ばれている");
     final sharedPreferences = await SharedPreferences.getInstance();
     final authString = sharedPreferences.getString(sharedPreferencesKey);
     if (authString == null) {
