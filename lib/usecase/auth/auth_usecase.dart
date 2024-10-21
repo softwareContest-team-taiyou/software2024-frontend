@@ -10,8 +10,9 @@ part 'auth_usecase.g.dart';
 @riverpod
 Future<void> loginUseCase(LoginUseCaseRef ref) async {
   try {
-    var credential =
-        await auth0.webAuthentication().login(audience: 'software');
+    var credential = await auth0
+        .webAuthentication()
+        .login(audience: 'https://dev-fg2uut4bcfvsb2p7.us.auth0.com/api/v2/');
     // credentialをAuthに変換
     final auth = Auth.fromAuth0Credentials(credential);
     print("作られているか確認");
