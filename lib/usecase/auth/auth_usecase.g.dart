@@ -6,7 +6,7 @@ part of 'auth_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginUseCaseHash() => r'2dc69030ed2761180311dd3ca03b8aaa933ad2bb';
+String _$loginUseCaseHash() => r'e3b55725ed4fcbd44ccd6348d8bd14efae624d1c';
 
 /// See also [loginUseCase].
 @ProviderFor(loginUseCase)
@@ -20,6 +20,21 @@ final loginUseCaseProvider = AutoDisposeFutureProvider<void>.internal(
 );
 
 typedef LoginUseCaseRef = AutoDisposeFutureProviderRef<void>;
+String _$singInUseCaseHash() => r'198fc4ba7c1f07613f9b0668c1e4d6207f5a885f';
+
+/// See also [singInUseCase].
+@ProviderFor(singInUseCase)
+final singInUseCaseProvider = AutoDisposeFutureProvider<void>.internal(
+  singInUseCase,
+  name: r'singInUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$singInUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SingInUseCaseRef = AutoDisposeFutureProviderRef<void>;
 String _$logoutUseCaseHash() => r'b0ab20d5ac57a84ddb5520a9b3a1c19423716f84';
 
 /// See also [logoutUseCase].

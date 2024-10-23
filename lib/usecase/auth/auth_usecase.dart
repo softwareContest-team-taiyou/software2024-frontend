@@ -15,7 +15,25 @@ Future<void> loginUseCase(LoginUseCaseRef ref) async {
         .login(audience: 'https://dev-fg2uut4bcfvsb2p7.us.auth0.com/api/v2/');
     // credentialをAuthに変換
     final auth = Auth.fromAuth0Credentials(credential);
-    print("作られているか確認");
+    // shared_preferencesに保存
+    await ref.read(authRepositoryProvider).registerAuth(auth);
+    await ref.read(userGrpcServiceProvider).createUser();
+    // ここのproviderのみrouterで定義
+    ref.invalidate(checkLoggedInUseCaseProvider);
+    ref.invalidate(checkNameInUseCaseProvider);
+  } catch (e) {
+    return; // エラーが発生したら早期リターン
+  }
+}
+
+@riverpod
+Future<void> singInUseCase(LoginUseCaseRef ref) async {
+  try {
+    var credential = await auth0.webAuthentication().login(
+        audience: 'https://dev-fg2uut4bcfvsb2p7.us.auth0.com/api/v2/',
+        parameters: {'screen_hint': 'signup'});
+    // credentialをAuthに変換
+    final auth = Auth.fromAuth0Credentials(credential);
     // shared_preferencesに保存
     await ref.read(authRepositoryProvider).registerAuth(auth);
     await ref.read(userGrpcServiceProvider).createUser();
