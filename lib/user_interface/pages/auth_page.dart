@@ -9,6 +9,10 @@ class MainView extends ConsumerWidget {
     ref.read(loginUseCaseProvider);
   }
 
+  void signIn(WidgetRef ref) {
+    ref.read(singInUseCaseProvider);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -30,32 +34,59 @@ class MainView extends ConsumerWidget {
           children: <Widget>[
             //ログインアイコン
             Image.asset('assets/images/login_icon.jpg', // ローカルの画像
-              width:450,
-              height:450
-            ),
+                width: 450,
+                height: 450),
 
-            //ログインボタン
+            // ボタンを縦に並べるために Column を使用
             Positioned(
-              bottom: 100, 
-              child: ElevatedButton(
-                onPressed: () async {
-                  login(ref);
-                },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 24, // テキストのフォントサイズ
-                    fontWeight: FontWeight.bold, // テキストを太字に
+              bottom: 100,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      login(ref);
+                    },
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 24, // テキストのフォントサイズ
+                        fontWeight: FontWeight.bold, // テキストを太字に
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF479955), // ボタンの背景色を変更
+                      foregroundColor: Colors.white, // ボタンのテキスト色を変更
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16), // ボタンのパディングを増やす
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8), // ボタンの角を丸くする
+                      ),
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF479955), // ボタンの背景色を変更
-                  foregroundColor: Colors.white, // ボタンのテキスト色を変更
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16), // ボタンのパディングを増やす
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8), // ボタンの角を丸くする
+                  const SizedBox(height: 16), // ボタン間のスペース
+                  ElevatedButton(
+                    onPressed: () async {
+                      signIn(ref);
+                    },
+                    child: const Text(
+                      'サインイン',
+                      style: TextStyle(
+                        fontSize: 24, // テキストのフォントサイズ
+                        fontWeight: FontWeight.bold, // テキストを太字に
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF479955), // ボタンの背景色を変更
+                      foregroundColor: Colors.white, // ボタンのテキスト色を変更
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 16), // ボタンのパディングを増やす
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8), // ボタンの角を丸くする
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             //カエルキャラクター
