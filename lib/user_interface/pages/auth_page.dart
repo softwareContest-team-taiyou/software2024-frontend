@@ -33,13 +33,19 @@ class MainView extends ConsumerWidget {
           alignment: Alignment.center,
           children: <Widget>[
             //ログインアイコン
-            Image.asset('assets/images/login_icon.jpg', // ローカルの画像
-                width: 450,
-                height: 450),
+            Positioned(
+              bottom: 300, // 画面下から10ピクセルの位置
+              child: Image.asset(
+                'assets/images/login_icon.jpg', // アイコン画像
+                width: 400, // アイコン画像の幅
+                height: 400, // アイコン画像の高さ
+              ),
+            ),
+
 
             // ボタンを縦に並べるために Column を使用
             Positioned(
-              bottom: 100,
+              bottom: 120,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -48,7 +54,7 @@ class MainView extends ConsumerWidget {
                       login(ref);
                     },
                     child: const Text(
-                      'Login',
+                      'ログイン',
                       style: TextStyle(
                         fontSize: 24, // テキストのフォントサイズ
                         fontWeight: FontWeight.bold, // テキストを太字に
@@ -58,31 +64,42 @@ class MainView extends ConsumerWidget {
                       backgroundColor: Color(0xFF479955), // ボタンの背景色を変更
                       foregroundColor: Colors.white, // ボタンのテキスト色を変更
                       padding: EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 16), // ボタンのパディングを増やす
+                          horizontal: 128, vertical: 16), // ボタンのパディングを増やす
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8), // ボタンの角を丸くする
+                        borderRadius: BorderRadius.circular(824), // ボタンの角を丸くする
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16), // ボタン間のスペース
+
+                  //はじめての方はこちら
+                  const SizedBox(height: 32),
+                  const Text(
+                      'はじめての方はこちら',
+                      style: TextStyle(
+                        fontSize: 18, // テキストのフォントサイズ
+                        fontWeight: FontWeight.bold, // テキストを太字に
+                      ),
+                    ),
+
+                  const SizedBox(height: 8), // ボタン間のスペース
                   ElevatedButton(
                     onPressed: () async {
                       signIn(ref);
                     },
                     child: const Text(
-                      'サインイン',
+                      '新規登録',
                       style: TextStyle(
                         fontSize: 24, // テキストのフォントサイズ
                         fontWeight: FontWeight.bold, // テキストを太字に
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF479955), // ボタンの背景色を変更
-                      foregroundColor: Colors.white, // ボタンのテキスト色を変更
+                      backgroundColor: Color(0x30479955), // ボタンの背景色を変更 // ボタンの背景色を変更
+                      foregroundColor: Colors.black, // ボタンのテキスト色を変更
                       padding: EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 16), // ボタンのパディングを増やす
+                          horizontal: 128, vertical: 16), // ボタンのパディングを増やす
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8), // ボタンの角を丸くする
+                        borderRadius: BorderRadius.circular(24), // ボタンの角を丸くする
                       ),
                     ),
                   ),
