@@ -6,14 +6,14 @@ import 'package:flutter_template/usecase/box/box_usecase.dart';
 import 'package:go_router/go_router.dart';
 //「routed」はプロジェクト名です。
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+class SettingPage extends ConsumerStatefulWidget {
+  const SettingPage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _SettingPageState createState() => _SettingPageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
+class _SettingPageState extends ConsumerState<SettingPage> {
   void logout() {
     ref.read(logoutUseCaseProvider);
     // 必要であれば、ここでログアウト後のリダイレクトなどの処理を行う
@@ -27,14 +27,15 @@ class _HomePageState extends ConsumerState<HomePage> {
     // Boxのデータを取得し、適切にUIに反映
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ホーム'),
-        actions: [
-          TextButton(
-              onPressed: () async {
-                logout();
-              },
-              child: const Text('ログアウト'))
-        ],
+        title: const Text(
+          '設定画面',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFF7F7F7),
+          ),
+        ),
+        backgroundColor: const Color(0xFF38A5C6), // AppBarの背景色
       ),
       body: Center(
         child: SizedBox(
@@ -63,7 +64,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     style: const TextStyle(fontSize: 24), // テキストのサイズを調整
                   ),
                   Text(
-                    box.isLock ? 'Locked' : 'Unlocked', // isLock属性の表示
+                    box.isLock ? 'Locked' : 'locked', // isLock属性の表示
                     style: const TextStyle(
                         fontSize: 16, color: Colors.white), // テキストのスタイル調整
                   ),
@@ -80,6 +81,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
+
     );
   }
 
@@ -92,4 +94,5 @@ class _HomePageState extends ConsumerState<HomePage> {
       ref.read(lockUseCaseProvider);
     }
   }
+  
 }

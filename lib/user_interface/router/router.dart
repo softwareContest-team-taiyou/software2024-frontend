@@ -5,7 +5,7 @@ import 'package:flutter_template/domain/user/repository/user_repository.dart';
 import 'package:flutter_template/user_interface/pages/auth_page.dart';
 import 'package:flutter_template/user_interface/pages/init_register_page.dart';
 import 'package:go_router/go_router.dart';
-import '../pages/home_page.dart';
+import '../pages/bottom.dart';
 import '../pages/login_page.dart';
 import '../pages/detail_page.dart';
 import '../pages/splash_page.dart';
@@ -62,7 +62,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => NoTransitionPage<void>(
           key: state.pageKey,
           restorationId: state.pageKey.value,
-          child: HomePage(),
+          child: BottomState(),
         ),
       ),
       GoRoute(

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:math' as math;
 
-
-
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
@@ -98,13 +96,13 @@ class SunAndMoonCoin extends StatefulWidget {
 class _SunAndMoonCoinState extends State<SunAndMoonCoin>
     with SingleTickerProviderStateMixin<SunAndMoonCoin> {
   late final sunIcon = Image.asset(
-    'assets/images/camera.jpg',
+    'assets/images/camera.png',
     height: widget.size,
     width: widget.size,
   );
 
   late final moonIcon = Image.asset(
-    'assets/images/treasure.jpg',
+    'assets/images/treasure.png',
     height: widget.size,
     width: widget.size,
   );

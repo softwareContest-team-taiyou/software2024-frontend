@@ -36,7 +36,7 @@ class MainView extends ConsumerWidget {
             Positioned(
               bottom: 300, // 画面下から10ピクセルの位置
               child: Image.asset(
-                'assets/images/login_icon.jpg', // アイコン画像
+                'assets/images/login_icon.png', // アイコン画像
                 width: 400, // アイコン画像の幅
                 height: 400, // アイコン画像の高さ
               ),
@@ -111,7 +111,7 @@ class MainView extends ConsumerWidget {
               right: 10, // 画面右から10ピクセルの位置
               bottom: 10, // 画面下から10ピクセルの位置
               child: Image.asset(
-                'assets/images/software_character.jpg', // キャラクター画像
+                'assets/images/software_character.png', // キャラクター画像
                 width: 100, // キャラクター画像の幅
                 height: 100, // キャラクター画像の高さ
               ),
