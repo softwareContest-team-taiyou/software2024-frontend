@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/domain/box/box.dart';
 import 'package:flutter_template/usecase/box/box_usecase.dart';
+import 'package:flutter_template/usecase/auth/auth_usecase.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,11 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
   late final AnimationController _controller;
   late final Animation<double> _animationValue;
   CoinStatus _currentStatus = CoinStatus.cameramode;
+
+
+  void logout(WidgetRef ref, BuildContext context) {
+    ref.read(logoutUseCaseProvider);
+  }
 
   @override
   void initState() {
@@ -62,16 +68,22 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
     final boxState = ref.watch(isLockUseCaseProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'ホーム画面',
+        title: Text('デバイス登録',          
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Color(0xFFF7F7F7),
-          ),
-        ),
+          ),),
+        actions: [
+          TextButton(
+              onPressed: () async {
+                logout(ref, context);
+              },
+              child: const Text('ログアウト'))
+        ],
         backgroundColor: const Color(0xFF38A5C6),
       ),
+
       body: Column(
         children: [
           boxState.when(
