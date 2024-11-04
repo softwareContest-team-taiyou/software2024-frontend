@@ -4,6 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/usecase/auth/auth_usecase.dart';
 import 'package:flutter_template/usecase/boxkey/boxkey_usecase.dart';
 
+// Box IDとKey IDのエラーチェック用Provider
+final boxIdErrorProvider = StateProvider<bool>((ref) => false);
+final keyIdErrorProvider = StateProvider<bool>((ref) => false);
+
+// TextEditingControllerを保持するProvider
+final boxIdControllerProvider = Provider((ref) => TextEditingController());
+final keyIdControllerProvider = Provider((ref) => TextEditingController());
+final boxNameControllerProvider = Provider((ref) => TextEditingController());
+final keyNameControllerProvider = Provider((ref) => TextEditingController());
+
 class InitRegisterPage extends ConsumerWidget {
   const InitRegisterPage({super.key});
 
@@ -11,19 +21,17 @@ class InitRegisterPage extends ConsumerWidget {
     ref.read(logoutUseCaseProvider);
   }
 
-  // ラベルのテキストスタイル用関数
-  Widget buildLabelText(String text, {bool isBold = false, double font = 20}) {
+  Widget buildLabelText(String text, {bool isBold = false, double font = 20, int colors = 0xFF333333}) {
     return Text(
       text,
       style: TextStyle(
         fontSize: font,
         fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-        color: const Color(0xFF333333),
+        color: Color(colors),
       ),
     );
   }
 
-  // TextFieldウィジェットを生成する関数
   Widget buildTextField(TextEditingController controller) {
     return TextField(
       controller: controller,
@@ -35,10 +43,11 @@ class InitRegisterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController boxIdController = TextEditingController();
-    final TextEditingController keyIdController = TextEditingController();
-    final TextEditingController boxNameController = TextEditingController();
-    final TextEditingController keyNameController = TextEditingController();
+    // ProviderからTextEditingControllerを取得
+    final boxIdController = ref.watch(boxIdControllerProvider);
+    final keyIdController = ref.watch(keyIdControllerProvider);
+    final boxNameController = ref.watch(boxNameControllerProvider);
+    final keyNameController = ref.watch(keyNameControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -66,24 +75,50 @@ class InitRegisterPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 24),
-            Center(child:buildLabelText('ボックス情報', isBold: true,font: 24),),
+            Center(child: buildLabelText('ボックス情報', isBold: true, font: 24)),
             const SizedBox(height: 8),
-            buildLabelText('Box ID'),
-            buildLabelText('半角数字',font:12),
-            buildTextField(boxIdController),
+            Row(
+              children: [
+                buildLabelText('Box ID'),
+                const SizedBox(width: 8),
+                if (ref.watch(boxIdErrorProvider)) 
+                  buildLabelText('※BoxIDを入力してください', colors: 0xFFFF0000),
+              ],
+            ),
+            buildLabelText('半角数字', font: 12),
+            TextField(
+              controller: boxIdController,
+              decoration: const InputDecoration(border: OutlineInputBorder()),
+              onChanged: (text) {
+                ref.read(boxIdErrorProvider.notifier).state = text.isEmpty;
+              },
+            ),
             const SizedBox(height: 10),
             buildLabelText('Box Name'),
-            buildLabelText('表示名を入力してください　例:NISBox',font:12),
+            buildLabelText('表示名を入力してください　例:NISBox', font: 12),
             buildTextField(boxNameController),
             const SizedBox(height: 24),
-            Center(child:buildLabelText('キー情報', isBold: true,font:24),),
+            Center(child: buildLabelText('キー情報', isBold: true, font: 24)),
             const SizedBox(height: 8),
-            buildLabelText('Key ID'),
-            buildLabelText('半角数字',font:12),
-            buildTextField(keyIdController),
+            Row(
+              children: [
+                buildLabelText('Key ID'),
+                const SizedBox(width: 8),
+                if (ref.watch(keyIdErrorProvider)) 
+                  buildLabelText('※KeyIDを入力してください', colors: 0xFFFF0000),
+              ],
+            ),
+            buildLabelText('半角数字', font: 12),
+            TextField(
+              controller: keyIdController,
+              decoration: const InputDecoration(border: OutlineInputBorder()),
+              onChanged: (text) {
+                ref.read(keyIdErrorProvider.notifier).state = text.isEmpty;
+              },
+            ),
             const SizedBox(height: 10),
             buildLabelText('Key Name'),
-            buildLabelText('表示名を入力してください　例:NISKey',font:12),
+            buildLabelText('表示名を入力してください　例:NISKey', font: 12),
             buildTextField(keyNameController),
             const SizedBox(height: 20),
             Center(
@@ -93,12 +128,17 @@ class InitRegisterPage extends ConsumerWidget {
                   foregroundColor: Colors.white,
                 ),
                 onPressed: () async {
-                  await ref.read(InitCreateBoxKeyUseCaseProvider(
-                    boxIdController.text,
-                    boxNameController.text,
-                    keyIdController.text,
-                    keyNameController.text,
-                  ));
+                  ref.read(boxIdErrorProvider.notifier).state = boxIdController.text.isEmpty;
+                  ref.read(keyIdErrorProvider.notifier).state = keyIdController.text.isEmpty;
+
+                  if (boxIdController.text.isNotEmpty && keyIdController.text.isNotEmpty) {
+                    await ref.read(InitCreateBoxKeyUseCaseProvider(
+                      boxIdController.text,
+                      boxNameController.text,
+                      keyIdController.text,
+                      keyNameController.text,
+                    ));
+                  }
                 },
                 child: const Text(
                   '登録する',

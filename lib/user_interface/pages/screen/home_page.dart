@@ -182,6 +182,15 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // カメラボタンが押されたときの処理を追加
+          print("カメラボタンが押されました");
+        },
+        backgroundColor: Color(0xAA38A5C6), // ボタンの色
+        child: const Icon(Icons.camera_alt), // カメラアイコン
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // 右下に配置
     );
   }
 }
