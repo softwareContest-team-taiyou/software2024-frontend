@@ -10,6 +10,17 @@ class InitRegisterPage extends ConsumerWidget {
     ref.read(logoutUseCaseProvider);
   }
 
+    Widget buildLabelText(String text, {bool isBold = false, double font = 20, int colors = 0xFF333333}) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: font,
+        fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+        color: Color(colors),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TextEditingController boxIdController = TextEditingController();

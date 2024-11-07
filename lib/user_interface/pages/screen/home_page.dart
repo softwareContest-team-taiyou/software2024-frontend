@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/domain/box/box.dart';
 import 'package:flutter_template/usecase/box/box_usecase.dart';
+import 'package:flutter_template/usecase/auth/auth_usecase.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,11 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
   late final AnimationController _controller;
   late final Animation<double> _animationValue;
   CoinStatus _currentStatus = CoinStatus.cameramode;
+
+
+  void logout(WidgetRef ref, BuildContext context) {
+    ref.read(logoutUseCaseProvider);
+  }
 
   @override
   void initState() {
@@ -55,13 +61,15 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
     } else {
       ref.read(lockUseCaseProvider);
     }
+    // 状態を再取得して更新を反映
+    ref.refresh(isLockUseCaseProvider);
   }
 
   @override
   Widget build(BuildContext context) {
     final boxState = ref.watch(isLockUseCaseProvider);
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         title: const Text(
           'ホーム画面',
           style: TextStyle(
@@ -70,8 +78,17 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
             color: Color(0xFFF7F7F7),
           ),
         ),
-        backgroundColor: const Color(0xFF38A5C6),
+        backgroundColor: const Color(0xFF38A5C6), // AppBarの背景色
+                actions: [
+          TextButton(
+              onPressed: () async {
+                logout(ref, context);
+              },
+              child: const Icon(Icons.logout,color:Colors.black,size:32)
+              )
+        ],
       ),
+
       body: Column(
         children: [
           boxState.when(
@@ -90,7 +107,7 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
                   ),
                   const SizedBox(width: 8.0), // アイコンとテキスト間のスペース
                   Text(
-                    box.isLock ? '閉まっています' : '開いています',
+                    box.isLock ? '開いています' : '閉まっています',
                     style: const TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 ],
@@ -170,6 +187,15 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // カメラボタンが押されたときの処理を追加
+          print("カメラボタンが押されました");
+        },
+        backgroundColor: Color(0xAA38A5C6), // ボタンの色
+        child: const Icon(Icons.camera_alt), // カメラアイコン
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // 右下に配置
     );
   }
 }
