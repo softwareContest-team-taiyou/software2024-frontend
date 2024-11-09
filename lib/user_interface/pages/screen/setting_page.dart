@@ -14,17 +14,35 @@ class SettingPage extends ConsumerStatefulWidget {
 }
 
 class _SettingPageState extends ConsumerState<SettingPage> {
-  void logout() {
+  void logout(WidgetRef ref, BuildContext context) {
     ref.read(logoutUseCaseProvider);
-    // 必要であれば、ここでログアウト後のリダイレクトなどの処理を行う
+  }
+
+    Widget buildLabelText(String text, {bool isBold = true, double font = 20, int colors = 0xFF333333}) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: font,
+        fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+        color: Color(colors),
+      ),
+    );
+  }
+
+    Widget _buildSettingItem(BuildContext context, IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.black54), // アイコン
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 20, color: Colors.black87),
+      ),
+      trailing: const Icon(Icons.chevron_right, color: Colors.black54), // 矢印
+      onTap: onTap, // 項目がタップされたときの動作
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // Boxの状態を監視
-    final boxState = ref.watch(isLockUseCaseProvider);
-
-    // Boxのデータを取得し、適切にUIに反映
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -36,63 +54,49 @@ class _SettingPageState extends ConsumerState<SettingPage> {
           ),
         ),
         backgroundColor: const Color(0xFF38A5C6), // AppBarの背景色
+                actions: [
+          TextButton(
+              onPressed: () async {
+                logout(ref, context);
+              },
+              child: const Icon(Icons.logout,color:Colors.black,size:32)
+              )
+        ],
       ),
-      body: Center(
-        child: SizedBox(
-          width: 200, // FloatingActionButtonのデフォルトサイズの10倍
-          height: 200, // FloatingActionButtonのデフォルトサイズの10倍
-          child: FloatingActionButton(
-            onPressed: () {
-              boxState.when(
-                data: (box) {
-                  toggleLock(box); // Boxのロック状態を切り替える
-                },
-                loading: () {
-                  // ロード中は何もしない
-                },
-                error: (error, stack) {
-                  // エラーが発生した場合は何もしない
-                },
-              );
-            },
-            child: boxState.when(
-              data: (box) => Column(
-                mainAxisSize: MainAxisSize.min, // 子要素を中心に配置
-                children: [
-                  Text(
-                    box.name, // Boxオブジェクトのname属性
-                    style: const TextStyle(fontSize: 24), // テキストのサイズを調整
-                  ),
-                  Text(
-                    box.isLock ? 'Locked' : 'locked', // isLock属性の表示
-                    style: const TextStyle(
-                        fontSize: 16, color: Colors.white), // テキストのスタイル調整
-                  ),
-                ],
-              ),
-              loading: () => const CircularProgressIndicator(),
-              error: (error, stack) => Text(
-                'エラー: $error', // エラーメッセージを表示
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-            backgroundColor: Colors.blue, // ボタンの背景色
-            shape: const CircleBorder(),
-          ),
+            body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [          
+            buildLabelText('ユーザ情報'),
+            _buildSettingItem(context, Icons.person, 'メールアドレス', () {
+              // ナビゲーション先を指定
+            }),
+            _buildSettingItem(context, Icons.key, 'Key ID', () {
+              // ナビゲーション先を指定
+            }),
+            _buildSettingItem(context, Icons.token, 'Box ID', () {
+              // ナビゲーション先を指定
+            }),
+            buildLabelText('アプリ情報'),
+            _buildSettingItem(context, Icons.check_circle, 'バージョン', () {
+              // ナビゲーション先を指定
+            }),
+            _buildSettingItem(context, Icons.book, '利用規約', () {
+              // ナビゲーション先を指定
+            }),
+            _buildSettingItem(context, Icons.book, 'プライバシーポリシー', () {
+              // ナビゲーション先を指定
+            }),
+            _buildSettingItem(context, Icons.book, 'ライセンス情報', () {
+              // ナビゲーション先を指定
+            }),
+            const SizedBox(height: 32),
+            _buildSettingItem(context, Icons.backspace, 'アカウントの削除', () {
+              // ナビゲーション先を指定
+            }),
+          ],
         ),
       ),
-
     );
   }
-
-  void toggleLock(Box box) {
-    if (box.isLock) {
-      // ボックスがロックされている場合、ロックを解除
-      ref.read(unlockUseCaseProvider);
-    } else {
-      // ボックスがロックされていない場合、ロックを有効に
-      ref.read(lockUseCaseProvider);
-    }
-  }
-  
 }

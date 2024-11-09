@@ -61,27 +61,32 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
     } else {
       ref.read(lockUseCaseProvider);
     }
+    // 状態を再取得して更新を反映
+    ref.refresh(isLockUseCaseProvider);
   }
 
   @override
   Widget build(BuildContext context) {
     final boxState = ref.watch(isLockUseCaseProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('デバイス登録',          
+       appBar: AppBar(
+        title: const Text(
+          'ホーム画面',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Color(0xFFF7F7F7),
-          ),),
-        actions: [
+          ),
+        ),
+        backgroundColor: const Color(0xFF38A5C6), // AppBarの背景色
+                actions: [
           TextButton(
               onPressed: () async {
                 logout(ref, context);
               },
-              child: const Text('ログアウト'))
+              child: const Icon(Icons.logout,color:Colors.black,size:32)
+              )
         ],
-        backgroundColor: const Color(0xFF38A5C6),
       ),
 
       body: Column(
@@ -102,7 +107,7 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
                   ),
                   const SizedBox(width: 8.0), // アイコンとテキスト間のスペース
                   Text(
-                    box.isLock ? '閉まっています' : '開いています',
+                    box.isLock ? '開いています' : '閉まっています',
                     style: const TextStyle(fontSize: 24, color: Colors.white),
                   ),
                 ],
