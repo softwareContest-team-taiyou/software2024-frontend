@@ -46,6 +46,7 @@ dependencies:
   protobuf: ^3.1.0
   grpc: ^4.0.1
   hooks_riverpod: ^2.5.2
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
@@ -83,7 +84,10 @@ flutter:
     - assets/images/locked.png
     - assets/images/unlocked.png
   #   - images/a_dot_ham.jpeg
-
+flutter_icons:
+  ios: true
+  image_path: "assets/images/icon.png"
+  remove_alpha_ios: true
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
