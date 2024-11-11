@@ -11,7 +11,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   void initState() {
     super.initState();
@@ -22,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
 
   int _counter = 0;
 
-    void _incrementCounter() {
+  void _incrementCounter() {
     setState(() {
       _counter++;
     });
@@ -30,33 +29,34 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
       body: Stack(
-      children: [
-        Positioned(
-          left: 80,   // 左から150ピクセルの位置
-          bottom: 300, // 下から300ピクセルの位置
-          child: SunAndMoonCoin(
-            size: 256,
-            callback: (CoinStatus status) {
-              if (status == CoinStatus.sun) {
-                _incrementCounter();
-              }
-            },
+        children: [
+          Center(
+            child: SunAndMoonCoin(
+              size: size.width * 0.5, // Adjust size to be 25% of screen width
+              callback: (CoinStatus status) {
+                if (status == CoinStatus.sun) {
+                  _incrementCounter();
+                }
+              },
+            ),
           ),
-        ),
           Positioned(
-          left: 100,   // 左から150ピクセルの位置
-          bottom: 250, 
-            child:Text(
-            'Now Loading...',
-            style: TextStyle(fontSize: 32, 
-            color:Colors.black ,
-            fontWeight: FontWeight.bold,),
-          ),
+            left: size.width * 0.5 - 100, // Center text horizontally
+            bottom: size.height * 0.3, // Position from bottom
+            child: Text(
+              'Now Loading...',
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           )
-      ],
-    ),
+        ],
+      ),
     );
   }
 }
@@ -65,9 +65,11 @@ class _SplashPageState extends State<SplashPage> {
 enum CoinStatus {
   /// 太陽
   sun,
+
   /// 月
   moon;
 }
+
 /// 太陽と月がそれぞれ表と裏に書かれているコインをイメージして作成しました。
 class SunAndMoonCoin extends StatefulWidget {
   const SunAndMoonCoin({
@@ -78,21 +80,27 @@ class SunAndMoonCoin extends StatefulWidget {
     this.size = 32,
     this.color = Colors.orangeAccent,
   });
+
   /// 太陽と月が入れ替わるときに実施されるコールバックを設定します
   /// 例：テーマの入れ替え
   final void Function(CoinStatus coinStatus)? callback;
+
   /// アニメーションの時間
   final Duration duration;
+
   ///初期状態
   final CoinStatus initStatus;
+
   /// サイズ
   final double size;
+
   ///アイコンの色
   final Color color;
-  
+
   @override
   State createState() => _SunAndMoonCoinState();
 }
+
 class _SunAndMoonCoinState extends State<SunAndMoonCoin>
     with SingleTickerProviderStateMixin<SunAndMoonCoin> {
   late final sunIcon = Image.asset(
@@ -118,24 +126,27 @@ class _SunAndMoonCoinState extends State<SunAndMoonCoin>
     value: startValue,
   );
 
-  late final Animation<double> _animationValue = Tween(begin: startValue, end: endValue).animate(
+  late final Animation<double> _animationValue =
+      Tween(begin: startValue, end: endValue).animate(
     CurvedAnimation(
       parent: _controller,
       curve: Curves.easeIn,
     ),
   )..addListener(() {
-      if (_currentStatus == CoinStatus.sun && _animationValue.value >= breakValue) {
-        setState(() {
-          _currentStatus = CoinStatus.moon;
+          if (_currentStatus == CoinStatus.sun &&
+              _animationValue.value >= breakValue) {
+            setState(() {
+              _currentStatus = CoinStatus.moon;
+            });
+            _callback();
+          } else if (_currentStatus == CoinStatus.moon &&
+              _animationValue.value < breakValue) {
+            setState(() {
+              _currentStatus = CoinStatus.sun;
+            });
+            _callback();
+          }
         });
-        _callback();
-      } else if (_currentStatus == CoinStatus.moon && _animationValue.value < breakValue) {
-        setState(() {
-          _currentStatus = CoinStatus.sun;
-        });
-        _callback();
-      }
-    });
 
   @override
   void initState() {
@@ -156,7 +167,7 @@ class _SunAndMoonCoinState extends State<SunAndMoonCoin>
       await _controller.forward();
       if (mounted) await Future.delayed(const Duration(seconds: 1));
       if (!mounted) break;
-      
+
       await _controller.reverse();
       if (mounted) await Future.delayed(const Duration(seconds: 1));
     }

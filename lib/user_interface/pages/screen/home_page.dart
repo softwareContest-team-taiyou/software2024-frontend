@@ -12,11 +12,11 @@ class HomePage extends ConsumerStatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends ConsumerState<HomePage>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animationValue;
   CoinStatus _currentStatus = CoinStatus.cameramode;
-
 
   void logout(WidgetRef ref, BuildContext context) {
     ref.read(logoutUseCaseProvider);
@@ -37,11 +37,13 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
         curve: Curves.easeIn,
       ),
     )..addListener(() {
-        if (_animationValue.value >= 0.5 && _currentStatus == CoinStatus.cameramode) {
+        if (_animationValue.value >= 0.5 &&
+            _currentStatus == CoinStatus.cameramode) {
           setState(() {
             _currentStatus = CoinStatus.boxmode;
           });
-        } else if (_animationValue.value < 0.5 && _currentStatus == CoinStatus.boxmode) {
+        } else if (_animationValue.value < 0.5 &&
+            _currentStatus == CoinStatus.boxmode) {
           setState(() {
             _currentStatus = CoinStatus.cameramode;
           });
@@ -67,9 +69,11 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final double iconSize = size.width * 0.65;
     final boxState = ref.watch(isLockUseCaseProvider);
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: const Text(
           'ホーム画面',
           style: TextStyle(
@@ -79,13 +83,12 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
           ),
         ),
         backgroundColor: const Color(0xFF38A5C6), // AppBarの背景色
-                actions: [
+        actions: [
           TextButton(
               onPressed: () async {
                 logout(ref, context);
               },
-              child: const Icon(Icons.logout,color:Colors.black,size:32)
-              )
+              child: const Icon(Icons.logout, color: Colors.black, size: 32))
         ],
       ),
 
@@ -93,7 +96,7 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
         children: [
           boxState.when(
             data: (box) => Container(
-              width: double.infinity,            
+              width: double.infinity,
               color: Colors.green,
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               alignment: Alignment.center,
@@ -101,7 +104,9 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    box.isLock ? Icons.lock : Icons.lock_open, // Locked時とUnlocked時でアイコンを切り替え
+                    box.isLock
+                        ? Icons.lock
+                        : Icons.lock_open, // Locked時とUnlocked時でアイコンを切り替え
                     color: Colors.white,
                     size: 24,
                   ),
@@ -129,7 +134,8 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
                         toggleLock(box);
                         if (_controller.status == AnimationStatus.completed) {
                           _controller.reverse();
-                        } else if (_controller.status == AnimationStatus.dismissed) {
+                        } else if (_controller.status ==
+                            AnimationStatus.dismissed) {
                           _controller.forward();
                         }
                       },
@@ -152,24 +158,26 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
                           Transform(
                             alignment: FractionalOffset.center,
                             transform: Matrix4.identity()
-                              ..rotateY(_animationValue.value >= 0.5 ? math.pi : 0),
+                              ..rotateY(
+                                  _animationValue.value >= 0.5 ? math.pi : 0),
                             child: _currentStatus == CoinStatus.cameramode
                                 ? Image.asset(
                                     'assets/images/locked.png',
-                                    height: 256,
-                                    width: 256,
+                                    height: iconSize,
+                                    width: iconSize,
                                   )
                                 : Image.asset(
                                     'assets/images/unlocked.png',
-                                    height: 256,
-                                    width: 256,
+                                    height: iconSize,
+                                    width: iconSize,
                                   ),
                           ),
                           boxState.when(
                             data: (box) => Transform(
                               alignment: FractionalOffset.center,
                               transform: Matrix4.identity()
-                                ..rotateY(_animationValue.value >= 0.5 ? math.pi : 0),
+                                ..rotateY(
+                                    _animationValue.value >= 0.5 ? math.pi : 0),
                             ),
                             loading: () => const CircularProgressIndicator(),
                             error: (error, stack) => Text(
@@ -195,7 +203,8 @@ class _HomePageState extends ConsumerState<HomePage> with SingleTickerProviderSt
         backgroundColor: Color(0xAA38A5C6), // ボタンの色
         child: const Icon(Icons.camera_alt), // カメラアイコン
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // 右下に配置
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.endFloat, // 右下に配置
     );
   }
 }
