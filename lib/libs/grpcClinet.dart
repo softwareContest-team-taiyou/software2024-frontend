@@ -3,7 +3,7 @@ import 'package:grpc/grpc.dart';
 
 final grpcChannelProvider = Provider.autoDispose<ClientChannel>((ref) {
   final channel = ClientChannel(
-    'localhost',
+    '13.115.231.24',
     port: 3001,
     // By default .secure() is used.
     // It is also possible to configure with your own certificates.
