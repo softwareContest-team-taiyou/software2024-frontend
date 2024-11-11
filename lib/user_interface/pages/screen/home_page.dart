@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_template/domain/box/box.dart';
@@ -16,10 +17,18 @@ class _HomePageState extends ConsumerState<HomePage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animationValue;
+  final AudioPlayer audioPlayer = AudioPlayer();
   CoinStatus _currentStatus = CoinStatus.cameramode;
 
   void logout(WidgetRef ref, BuildContext context) {
     ref.read(logoutUseCaseProvider);
+  }
+
+  void playSound() async {
+    // Example using a local asset
+    // Ensure you have added the sound file to your project and updated pubspec.yaml to include it
+    const soundPath = "music/click_sound.mp3";
+    await audioPlayer.play(AssetSource(soundPath));
   }
 
   @override
@@ -54,10 +63,12 @@ class _HomePageState extends ConsumerState<HomePage>
   @override
   void dispose() {
     _controller.dispose();
+    audioPlayer.dispose();
     super.dispose();
   }
 
   void toggleLock(Box box) {
+    playSound();
     if (box.isLock) {
       ref.read(unlockUseCaseProvider);
     } else {

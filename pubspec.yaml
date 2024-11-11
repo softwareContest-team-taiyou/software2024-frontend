@@ -47,6 +47,7 @@ dependencies:
   grpc: ^4.0.1
   hooks_riverpod: ^2.5.2
   flutter_launcher_icons: ^0.14.1
+  audioplayers: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -83,6 +84,7 @@ flutter:
     - assets/images/camera.png
     - assets/images/locked.png
     - assets/images/unlocked.png
+    - assets/music/click_sound.mp3
   #   - images/a_dot_ham.jpeg
 flutter_icons:
   ios: true
